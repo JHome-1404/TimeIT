@@ -1,0 +1,353 @@
+{
+  "AUTH": {
+    "REGISTER": {
+      "Url": "http://localhost:3000/api/v1/auth/register",
+      "Method": "POST",
+      "Set": {
+        "name": "Lokesea",
+        "age": 19,
+        "country": "LoKesea",
+        "city": "",
+        "email": "lokesea@gmail.com",
+        "phone": 987654321,
+        "password": "54321"
+      },
+      "Res": "El correo ya esta en uso por otro usuario",
+      "Error": [
+        "Todos los campos son obligatorios",
+        "El correo ya esta en uso por otro usuario",
+        "El numero de telefono ya esta en uso por otro usuario",
+        "Error al registrar el usuario"
+      ]
+    },
+
+    "LOGIN": {
+      "Url": "http://localhost:3000/api/v1/auth/login",
+      "Method": "POST",
+      "Set": {
+        "email": "lokesea.com",
+        "password": "54321"
+      },
+      "Res": {
+        "_id": "user._id",
+        "name": "user.name",
+        "age": "user.age",
+        "country": "user.country",
+        "city": "user.city",
+        "email": "user.email",
+        "phone": "user.phone"
+      },
+      "Error": [
+        "Error del servidor desde el AUTH",
+        "Error del servidor desde el GETME"
+      ]
+    }
+  },
+
+  "ROUTES": {
+    "USER": {
+      "Url": "http://localhost:3000/api/v1/user",
+      "Method": {
+        "GET": {
+          "Res": {
+            "_id": " user._id",
+            "name": "user.name",
+            "age": " user.age",
+            "country": "user.country",
+            "city": "user.city",
+            "email": "user.email",
+            "phone": "user.phon"
+          },
+          "Error": [
+            "Error del servidor desde el AUTH",
+            "Error del servidor desde el GETME"
+          ]
+        },
+
+        "PATCH": {
+          "Set": {
+            "name": "Lokesea",
+            "age": 19,
+            "country": "Lokesea",
+            "city": "Lokesea",
+            "email": "Lokesea@gmail.com",
+            "phone": 987654321,
+            "password": "54321"
+          },
+          "Res": {
+            "_id": "65672b9ba60f9dd95930f2d4",
+            "name": "Robbin",
+            "age": 19,
+            "country": "Colombia",
+            "city": "Bogota",
+            "email": "robbin@gmail.com",
+            "phone": 987654321,
+            "role": "user",
+            "active": true,
+            "password": "$2a$10$rMn4QPhmiuLllD8L1W9cgOArjSi.mfm6JQtRpAggJTHvGUf3E3mBK"
+          },
+          "Error": [
+            "El correo ya esta en uso por otro usuario",
+            "El numero de telefono ya esta en uso por otro usuario",
+            "Error al actualizar el usuario"
+          ]
+        }
+      }
+    },
+
+    "DELETE": {
+      "Url": "http://localhost:3000/api/v1/user/delete",
+      "Res": "Usuario eliminado de la base de datos junto a su informacion",
+      "Error": [
+        "Error al cerrar sesion",
+        "Error al eliminar usuario de la base de datos"
+      ]
+    },
+
+    "LOGOUT": {
+      "Url": "http://localhost:3000/api/v1/user/logout",
+      "Method": "POST",
+      "Res": "Sesión cerrada exitosamente",
+      "Error": "Error al cerrar sesion"
+    },
+
+    "ALARM": {
+      "Url": "http://localhost:3000/api/v1/alarms",
+      "Method": {
+        "GET": {
+          "Res": {
+            "interval": {
+              "time": 0,
+              "count": 0
+            },
+            "days": {
+              "monday": true,
+              "tuesday": false,
+              "wednesday": true,
+              "thursday": false,
+              "friday": true,
+              "saturday": false,
+              "sunday": true
+            },
+            "_id": "6567bcf7acda221b3e39d139",
+            "userid": "65672b9ba60f9dd95930f2d4",
+            "title": "Nombre de la Alarma",
+            "execution": "2023-11-30T12:00:00.000Z",
+            "postpone": 0,
+            "state": true,
+            "__v": 0
+          },
+          "Error": [
+            "El usuario no tiene alarmas asociadas",
+            "Error al obtener las alarmas del usuario."
+          ]
+        },
+
+        "POST": {
+          "Set": {
+            "title": "Nombre de la Alarma",
+            "execution": "2023-11-30T12:00:00Z",
+            "state": true,
+            "interval": {
+              "time": 0,
+              "count": 0
+            },
+            "postpone": 0,
+            "days": {
+              "monday": true,
+              "tuesday": false,
+              "wednesday": true,
+              "thursday": false,
+              "friday": true,
+              "saturday": false,
+              "sunday": true
+            }
+          },
+          "Res": {
+            "title": "",
+            "execution": "",
+            "state": "",
+            "postpone": "",
+            "interval": "",
+            "days": ""
+          },
+          "Error": "Error al registrar alarma"
+        },
+
+        "PATCH": {
+          "Set": {
+            "alarmId": "idRealdealarma",
+            "title": "Nuevo contenido",
+            "execution": "2023-11-30T12:00:00Z",
+            "state": true,
+            "interval": {
+              "time": 0,
+              "count": 0
+            },
+            "postpone": 0,
+            "days": {
+              "monday": true,
+              "tuesday": false,
+              "wednesday": true,
+              "thursday": false,
+              "friday": true,
+              "saturday": false,
+              "sunday": true
+            }
+          },
+          "Res": {
+            "interval": {
+              "time": 0,
+              "count": 0
+            },
+            "days": {
+              "monday": true,
+              "tuesday": false,
+              "wednesday": true,
+              "thursday": false,
+              "friday": true,
+              "saturday": false,
+              "sunday": true
+            },
+            "_id": "6567bc9cba73ca67721bb7c0",
+            "userid": "65672b93a60f9dd95930f2d0",
+            "title": "Nuevo contenido",
+            "execution": "2023-11-30T12:00:00.000Z",
+            "postpone": 0,
+            "state": true,
+            "__v": 0
+          },
+          "Error": [
+            "La alarma no fue encontrada",
+            "Error al actualizar la alarma"
+          ]
+        },
+
+        "DELETE": {
+          "Set": {
+            "alarmIds": ["ID", "ID"]
+          },
+          "Res": "Alarmas eliminadas correctamente",
+          "Error": [
+            "La lista de Ids de alarmas no es valida",
+            "No se encontraron alarmas",
+            "Error al eliminar alarmas"
+          ]
+        }
+      }
+    },
+
+    "NOTES": {
+      "Url": "http://localhost:3000/api/v1/notes",
+      "Method": {
+        "GET": {
+          "Set": {},
+          "Res": {},
+          "Error": []
+        },
+
+        "POST": {
+          "Set": {
+            "title": "NOTA 1",
+            "content": "lorem x50 con saltos de linea y formato de texto y toda esa wea",
+            "alarmId": "En caso de que se relacionen alarma y nota"
+          },
+          "Res": {
+            "userid": "65672b9ba60f9dd95930f2d4",
+            "title": "NOTA 1",
+            "content": "lorem x50 con saltos de linea y formato de texto y toda esa wea",
+            "_id": "6567c69b3b4786a6ad66f66d",
+            "createdAt": "2023-11-29T23:17:47.402Z",
+            "updatedAt": "2023-11-29T23:17:47.403Z",
+            "__v": 0
+          },
+          "Error": "Error al registrar Nota"
+        },
+
+        "PATCH": {
+          "Set": {
+            "noteId": "65679c69d5050274d61283ea",
+            "title": "NOTA 1- actualizada",
+            "content": "lorem x50 con saltos de linea y formato de texto y toda esa wea",
+            "alarmId": ""
+          },
+          "Res": {
+            "_id": "65679c69d5050274d61283ea",
+            "userid": "65672b9ba60f9dd95930f2d4",
+            "alarmId": null,
+            "title": "NOTA 1- actualizada",
+            "content": "lorem x50 con saltos de linea y formato de texto y toda esa wea",
+            "createdAt": "2023-11-29T20:17:45.398Z",
+            "updatedAt": "2023-11-29T23:30:41.556Z",
+            "__v": 0
+          },
+          "Error": ["La nota no fue encontrada", "Error al registrar nota"]
+        },
+
+        "DELETE": {
+          "Set": {},
+          "Res": {},
+          "Error": []
+        }
+      }
+    },
+
+    "ROUTINES": {
+      "Url": "",
+      "Method": {
+        "GET": {
+          "Set": {},
+          "Res": {},
+          "Error": []
+        },
+
+        "POST": {
+          "Set": {},
+          "Res": {},
+          "Error": []
+        },
+
+        "PATCH": {
+          "Set": {},
+          "Res": {},
+          "Error": []
+        },
+
+        "DELETE": {
+          "Set": {},
+          "Res": {},
+          "Error": []
+        }
+      }
+    },
+
+    "HOME": {
+      "Url": "",
+      "Method": {
+        "GET": {
+          "Set": {},
+          "Res": {},
+          "Error": []
+        },
+
+        "POST": {
+          "Set": {},
+          "Res": {},
+          "Error": []
+        },
+
+        "PATCH": {
+          "Set": {},
+          "Res": {},
+          "Error": []
+        },
+
+        "DELETE": {
+          "Set": {},
+          "Res": {},
+          "Error": []
+        }
+      }
+    }
+  }
+}

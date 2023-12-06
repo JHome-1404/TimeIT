@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0%;
+  padding: 0%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  /* BTN & LINK */
+  --link: #b3b4b5;
+  --link-hover: #0a9e56;
+  --btn: #b3b4b5;
+  --btn-hover: #0a9e56;
+  --slider-active: #0a9e56;
+  --slider-inactive: #9e0a0a;
+
+  /* TEXT */
+  --text-light: #fff;
+  --text-grey: #b7b9ba;
+
+  /* WEB */
+  --web: #060f10;
+  --header: #2d3033;
+  --aside: #1d2125;
+
+  /* CARD */
+  --card-dark: #22272b;
+  --card-hover-dark: #333c43;
+
+  /* BORDER */
+  --border-dark: #808080;
+
+  /* STATUS */
+  --succes: #84b84c;
+  --danger: #b8b34c;
+  --error: #9f3a38;
+}
