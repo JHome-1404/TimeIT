@@ -1,7 +1,7 @@
 import { useFormikForm, useAuth } from "../../hooks";
 import { Form } from "semantic-ui-react";
 import { LoginValues, LoginValitations } from "../../validations";
-import { Auth } from "../../data/Auth";
+import { Auth } from "../../data";
 import { useNavigate } from "react-router-dom";
 
 const authController = new Auth();

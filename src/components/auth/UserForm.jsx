@@ -1,21 +1,39 @@
-import { useFormikForm } from "../../hooks";
+import { useFormikForm, useAuth } from "../../hooks";
 import { Form } from "semantic-ui-react";
-import { RegisterValues, RegisterValitations } from "../../validations";
-import { Auth } from "../../data";
+import { UserValues, UserValitations } from "../../validations";
+import { User } from "../../data";
 
-const authController = new Auth();
+const userController = new User();
 
-function RegisterForm({ openLogin }) {
-  const onSubmitRegister = async (formValues, setRes) => {
-    const data = await authController.register(formValues);
+function UserForm() {
+  const { user, updateUser } = useAuth();
+
+  const newValueForm = (preValue, newValue) => {
+    let newObject = { ...preValue };
+    for (let key in newValue) {
+      if (preValue.hasOwnProperty(key) && newValue[key] !== "") {
+        newObject[key] = newValue[key];
+      }
+    }
+    return newObject;
+  };
+
+  const onSubmitUser = async (formValues, setRes) => {
+    const nullValidation = Object.values(formValues).every((valor) => !valor);
+    if (nullValidation) {
+      setRes("No envies datos vacios");
+      return;
+    }
+
+    const newFormValue = newValueForm(user, formValues);
+    const data = await userController.updateUser(newFormValue);
     if (typeof data !== "object") {
       setRes(data);
       return;
     }
-    const { msg } = data;
-    setRes(msg);
+    updateUser(data);
     setTimeout(() => {
-      openLogin();
+      location.reload();
     }, 3000);
   };
 
@@ -27,12 +45,12 @@ function RegisterForm({ openLogin }) {
     handleChange,
     res,
     loading,
-  } = useFormikForm(RegisterValues, RegisterValitations, onSubmitRegister);
+  } = useFormikForm(UserValues, UserValitations, onSubmitUser);
 
   return (
     <Form className="register-form" onSubmit={handleSubmit}>
       <Form.Group widths="equal">
-        <Form.Field required>
+        <Form.Field>
           <label>Nombre:</label>
           <Form.Input
             name="name"
@@ -44,7 +62,7 @@ function RegisterForm({ openLogin }) {
           />
           {errors.name && <p className="text-red-500 error">{errors.name}</p>}
         </Form.Field>
-        <Form.Field required>
+        <Form.Field>
           <label>Edad:</label>
           <Form.Input
             name="age"
@@ -58,7 +76,7 @@ function RegisterForm({ openLogin }) {
         </Form.Field>
       </Form.Group>
       <Form.Group widths="equal">
-        <Form.Field required>
+        <Form.Field>
           <label>Pais:</label>
           <Form.Input
             name="country"
@@ -72,7 +90,7 @@ function RegisterForm({ openLogin }) {
             <p className="text-red-500 error">{errors.country}</p>
           )}
         </Form.Field>
-        <Form.Field required>
+        <Form.Field>
           <label>Ciudad:</label>
           <Form.Input
             name="city"
@@ -85,7 +103,7 @@ function RegisterForm({ openLogin }) {
           {errors.city && <p className="text-red-500 error">{errors.city}</p>}
         </Form.Field>
       </Form.Group>
-      <Form.Field required>
+      <Form.Field>
         <label>Telefono:</label>
         <Form.Input
           name="phone"
@@ -98,7 +116,7 @@ function RegisterForm({ openLogin }) {
         {errors.phone && <p className="text-red-500 error">{errors.phone}</p>}
       </Form.Field>
       <Form.Group widths="equal">
-        <Form.Field required>
+        <Form.Field>
           <label>Email:</label>
           <Form.Input
             name="email"
@@ -111,7 +129,7 @@ function RegisterForm({ openLogin }) {
           />
           {errors.email && <p className="text-red-500 error">{errors.email}</p>}
         </Form.Field>
-        <Form.Field required>
+        <Form.Field>
           <label>Contraseña:</label>
           <Form.Input
             name="password"
@@ -127,13 +145,12 @@ function RegisterForm({ openLogin }) {
           )}
         </Form.Field>
       </Form.Group>
-      <Form.Button type="submit" fluid disabled={loading}>
-        {loading ? "Registrando..." : "Registrarse"}
-      </Form.Button>
       {res && <p className="res">{res}</p>}
+      <Form.Button type="submit" fluid disabled={loading}>
+        {loading ? "Actualizando..." : "Actualizar"}
+      </Form.Button>
     </Form>
   );
 }
 
-export { RegisterForm };
-// ? TAREA : crear el sistema de validacion individual de cada input del formulario
+export { UserForm };

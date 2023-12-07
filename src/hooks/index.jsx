@@ -1,2 +1,2 @@
-export * from "./useAuth";
+export * from "./useGeneral";
 export * from "./useFormik";

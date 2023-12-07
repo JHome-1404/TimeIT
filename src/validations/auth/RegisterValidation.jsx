@@ -39,4 +39,3 @@ function RegisterValitations() {
 }
 
 export { RegisterValitations, RegisterValues };
-// ? TAREA : crear el sistema de validacion con .matches()

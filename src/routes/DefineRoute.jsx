@@ -7,11 +7,14 @@ import { useAuth } from "../hooks";
 
 function DefineRoute() {
   const { user } = useAuth();
+  const authRoutes = ["/auth", "/login", "/register"];
 
   return (
     <Routes>
       <Route index element={<Start />}></Route>
-      <Route path="/auth" element={<Auth />} />
+      {authRoutes.map((url) => {
+        return <Route key={url} path={url} element={<Auth />}></Route>;
+      })}
       <Route element={<ProtectRoute user={user} />}>
         <Route path="/home" element={loadLayout(WebLayout, Home)} />
         <Route path="/notes" element={loadLayout(WebLayout, Notes)} />

@@ -1,5 +1,9 @@
 function Alarms() {
-  return <div>Alarm</div>;
+  return (
+    <>
+      <div>Alarms</div>
+    </>
+  );
 }
 
 export { Alarms };

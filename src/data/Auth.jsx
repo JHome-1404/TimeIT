@@ -48,10 +48,6 @@ class Auth {
   getAccessKey() {
     return localStorage.getItem("key");
   }
-
-  removeAccessKey() {
-    localStorage.removeItem("key");
-  }
 }
 
 export { Auth };
